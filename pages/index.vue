@@ -34,51 +34,21 @@
 <script setup>
 import { ref } from "vue";
 
-// 状態管理
-const quotes = ref([]);
+// quotesの重複宣言を削除
 const quote = ref(null);
-
-// 名言リストの読み込み（APIを使用）
-const fetchQuotes = async () => {
-    const res = await fetch("/api/quotes"); // APIエンドポイントからデータを取得
-    quotes.value = await res.json();
-};
-
-// ランダムな名言を取得
-const getRandomQuote = () => {
-    if (quotes.value.length) {
-        const randomIndex = Math.floor(Math.random() * quotes.value.length);
-        quote.value = quotes.value[randomIndex];
-    }
-};
-
-// お気に入りリスト
 const favorites = ref([]);
 
-// 名言をお気に入りに追加
-const addToFavorites = () => {
-    if (process.client && quote.value && !favorites.value.includes(quote.value)) {
-        favorites.value.push(quote.value);
-        localStorage.setItem("favorites", JSON.stringify(favorites.value));
-    }
-};
-
-// お気に入りリストから削除
-const removeFromFavorites = (index) => {
-    favorites.value.splice(index, 1);
-    localStorage.setItem("favorites", JSON.stringify(favorites.value)); // ローカルストレージを更新
-};
+// シンプルに相対パスを使用
+const { data: quotes } = await useFetch('/quotes')
 
 // お気に入りリストをローカルストレージから読み込み
 const loadFavorites = () => {
-    if (process.client) { // クライアントサイドでのみ実行
-        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        favorites.value = savedFavorites;
-    }
+  if (process.client) {
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites.value = savedFavorites;
+  }
 };
 
-// 初期ロード
-fetchQuotes();
 loadFavorites();
 </script>
 
