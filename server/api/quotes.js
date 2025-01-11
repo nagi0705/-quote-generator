@@ -1,3 +1,6 @@
+// defineEventHandlerをインポート
+import { defineEventHandler } from '#imports'
+
 // Nuxt 3の新しいAPI形式
 export default defineEventHandler(() => {
   // シンプルに配列を返す
