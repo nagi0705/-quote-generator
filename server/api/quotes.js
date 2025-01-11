@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   try {
-    // 名言のデータ
+    
     const quotes = [
       { text: "自分が嫌っている誰かは、影に潜んでいる自分の姿。", author: "ロコ" },
       { text: "心動かされるのは、全力を出し切った未完成。", author: "ノア" },
