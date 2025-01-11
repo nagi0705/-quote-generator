@@ -19,8 +19,13 @@
         <!-- お気に入りリスト表示 -->
         <h2 class="text-xl font-bold mt-6">お気に入りリスト</h2>
         <ul>
-            <li v-for="(fav, index) in favorites" :key="index" class="border-b py-2">
-                "{{ fav.text }}" - {{ fav.author }}
+            <li v-for="(fav, index) in favorites" :key="index" class="border-b py-2 flex justify-between items-center">
+                <span>
+                    "{{ fav.text }}" - {{ fav.author }}
+                </span>
+                <button @click="removeFromFavorites(index)" class="text-red-500 hover:underline">
+                    削除
+                </button>
             </li>
         </ul>
     </div>
@@ -33,9 +38,9 @@ import { ref } from "vue";
 const quotes = ref([]);
 const quote = ref(null);
 
-// 名言リストの読み込み
+// 名言リストの読み込み（APIを使用）
 const fetchQuotes = async () => {
-    const res = await fetch("/quotes.json");
+    const res = await fetch("/api/quotes"); // APIエンドポイントからデータを取得
     quotes.value = await res.json();
 };
 
@@ -56,6 +61,12 @@ const addToFavorites = () => {
         favorites.value.push(quote.value);
         localStorage.setItem("favorites", JSON.stringify(favorites.value));
     }
+};
+
+// お気に入りリストから削除
+const removeFromFavorites = (index) => {
+    favorites.value.splice(index, 1);
+    localStorage.setItem("favorites", JSON.stringify(favorites.value)); // ローカルストレージを更新
 };
 
 // お気に入りリストをローカルストレージから読み込み
