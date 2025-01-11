@@ -1,22 +1,21 @@
 <template>
     <div class="container">
-        <button class="button">名言を表示</button>
+        <h1>ランダム名言ジェネレーター</h1>
+        <button class="button" @click="fetchQuote">名言を表示</button>
         <div v-if="quote" class="quote-container">
             <p>{{ quote.text }}</p>
             <p>- {{ quote.author }}</p>
-            <button class="button favorite-button">お気に入りに追加</button>
+            <button class="button" @click="addToFavorites">お気に入りに追加</button>
         </div>
         
-        <div class="favorites">
-            <h2>お気に入りリスト</h2>
-            <ul>
-                <li v-for="(fav, index) in favorites" :key="index" class="favorite-item">
-                    <p>{{ fav.text }}</p>
-                    <p>- {{ fav.author }}</p>
-                    <button class="button delete-button" @click="removeFromFavorites(index)">削除</button>
-                </li>
-            </ul>
-        </div>
+        <h2>お気に入りリスト</h2>
+        <ul>
+            <li v-for="(fav, index) in favorites" :key="index" class="favorite-item">
+                <p>{{ fav.text }}</p>
+                <p>- {{ fav.author }}</p>
+                <button class="delete-button" @click="removeFromFavorites(index)">削除</button>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -62,57 +61,62 @@ loadFavorites()
 
 <style scoped>
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  padding: 2rem;
+  text-align: center;
+  color: white;
   font-family: Arial, sans-serif;
 }
 
-.button {
-  background-color: #4CAF50;
+h1, h2 {
   color: white;
-  padding: 10px 20px;
-  border: none;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  color: white;
+  padding: 8px 16px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  margin: 10px 0;
+  margin: 10px;
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-  background-color: #45a049;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .quote-container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 20px 0;
-}
-
-.favorites {
-  margin-top: 40px;
+  margin: 20px auto;
+  max-width: 600px;
 }
 
 .favorite-item {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 10px 0;
+  margin: 10px auto;
+  max-width: 600px;
   list-style: none;
 }
 
 .delete-button {
-  background-color: #ff4444;
-}
-
-.delete-button:hover {
-  background-color: #cc0000;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 ul {
   padding: 0;
+  margin: 0;
 }
 </style>
