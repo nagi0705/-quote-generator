@@ -65,19 +65,18 @@ loadFavorites()
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   padding: 2rem;
   text-align: center;
-  color: white;
   font-family: Arial, sans-serif;
 }
 
 h1, h2 {
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  color: #333;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
 }
 
 .button {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid #fff;
+  color: #333;
   padding: 8px 16px;
   border-radius: 5px;
   cursor: pointer;
@@ -90,20 +89,22 @@ h1, h2 {
 }
 
 .quote-container {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 20px;
   border-radius: 10px;
   margin: 20px auto;
   max-width: 600px;
+  color: #333;
 }
 
 .favorite-item {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 15px;
   border-radius: 8px;
   margin: 10px auto;
   max-width: 600px;
   list-style: none;
+  color: #333;
 }
 
 .delete-button {
