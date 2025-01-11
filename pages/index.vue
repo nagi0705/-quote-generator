@@ -1,19 +1,19 @@
 <template>
     <div class="container">
-        <button @click="fetchQuote">名言を表示</button>
-        <div v-if="quote" class="quote-box">
+        <button class="button">名言を表示</button>
+        <div v-if="quote" class="quote-container">
             <p>{{ quote.text }}</p>
             <p>- {{ quote.author }}</p>
-            <button @click="addToFavorites">お気に入りに追加</button>
+            <button class="button favorite-button">お気に入りに追加</button>
         </div>
         
-        <div class="favorites-section">
+        <div class="favorites">
             <h2>お気に入りリスト</h2>
             <ul>
-                <li v-for="(fav, index) in favorites" :key="index">
+                <li v-for="(fav, index) in favorites" :key="index" class="favorite-item">
                     <p>{{ fav.text }}</p>
                     <p>- {{ fav.author }}</p>
-                    <button @click="removeFromFavorites(index)">削除</button>
+                    <button class="button delete-button" @click="removeFromFavorites(index)">削除</button>
                 </li>
             </ul>
         </div>
@@ -65,42 +65,54 @@ loadFavorites()
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.quote-box {
-  margin: 20px 0;
-  padding: 20px;
-  border: 1px solid #ccc;
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
 }
 
-.favorites-section {
+.button:hover {
+  background-color: #45a049;
+}
+
+.quote-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+
+.favorites {
   margin-top: 40px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin: 20px 0;
+.favorite-item {
+  background-color: white;
   padding: 15px;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 10px 0;
+  list-style: none;
 }
 
-button {
-  margin: 5px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
+.delete-button {
+  background-color: #ff4444;
 }
 
-button:hover {
-  background-color: #45a049;
+.delete-button:hover {
+  background-color: #cc0000;
+}
+
+ul {
+  padding: 0;
 }
 </style>
