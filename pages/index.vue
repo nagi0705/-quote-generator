@@ -81,3 +81,23 @@ const loadFavorites = () => {
 fetchQuotes();
 loadFavorites();
 </script>
+
+<style>
+body {
+    background: radial-gradient(circle, rgba(255, 175, 189, 0.8), rgba(100, 216, 249, 0.8));
+    color: #fff;
+    /* テキストを白に */
+    font-family: 'Arial', sans-serif;
+    /* モダンなフォント */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+</style>
