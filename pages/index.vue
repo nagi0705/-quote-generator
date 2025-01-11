@@ -7,7 +7,7 @@
         <p v-if="quote" class="text-gray-600 mb-4">- {{ quote.author }}</p>
 
         <!-- ランダム名言ボタン -->
-        <button @click="getRandomQuote" class="bg-blue-500 text-white px-4 py-2 rounded">
+        <button @click="fetchQuote" class="bg-blue-500 text-white px-4 py-2 rounded">
             名言を表示
         </button>
 
@@ -34,22 +34,27 @@
 <script setup>
 import { ref } from "vue";
 
-// quotesの重複宣言を削除
 const quote = ref(null);
 const favorites = ref([]);
 
-// シンプルに相対パスを使用
-const { data: quotes } = await useFetch('/quotes')
+// APIからデータを取得する関数
+const fetchQuote = async () => {
+  const { data } = await useFetch('/api/quotes')
+  if (data.value) {
+    const randomIndex = Math.floor(Math.random() * data.value.length)
+    quote.value = data.value[randomIndex]
+  }
+}
 
-// お気に入りリストをローカルストレージから読み込み
+// お気に入り機能
 const loadFavorites = () => {
   if (process.client) {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favorites.value = savedFavorites;
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || []
+    favorites.value = savedFavorites
   }
-};
+}
 
-loadFavorites();
+loadFavorites()
 </script>
 
 <style>
