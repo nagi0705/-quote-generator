@@ -1,41 +1,30 @@
 <template>
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">ランダム名言ジェネレーター</h1>
-
-        <!-- ランダムな名言表示 -->
-        <p v-if="quote" class="text-xl mb-2">"{{ quote.text }}"</p>
-        <p v-if="quote" class="text-gray-600 mb-4">- {{ quote.author }}</p>
-
-        <!-- ランダム名言ボタン -->
-        <button @click="fetchQuote" class="bg-blue-500 text-white px-4 py-2 rounded">
-            名言を表示
-        </button>
-
-        <!-- お気に入りに追加ボタン -->
-        <button @click="addToFavorites" class="bg-green-500 text-white px-4 py-2 rounded mt-2">
-            お気に入りに追加
-        </button>
-
-        <!-- お気に入りリスト表示 -->
-        <h2 class="text-xl font-bold mt-6">お気に入りリスト</h2>
-        <ul>
-            <li v-for="(fav, index) in favorites" :key="index" class="border-b py-2 flex justify-between items-center">
-                <span>
-                    "{{ fav.text }}" - {{ fav.author }}
-                </span>
-                <button @click="removeFromFavorites(index)" class="text-red-500 hover:underline">
-                    削除
-                </button>
-            </li>
-        </ul>
+    <div class="container">
+        <button @click="fetchQuote">名言を表示</button>
+        <div v-if="quote" class="quote-box">
+            <p>{{ quote.text }}</p>
+            <p>- {{ quote.author }}</p>
+            <button @click="addToFavorites">お気に入りに追加</button>
+        </div>
+        
+        <div class="favorites-section">
+            <h2>お気に入りリスト</h2>
+            <ul>
+                <li v-for="(fav, index) in favorites" :key="index">
+                    <p>{{ fav.text }}</p>
+                    <p>- {{ fav.author }}</p>
+                    <button @click="removeFromFavorites(index)">削除</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const quote = ref(null);
-const favorites = ref([]);
+const quote = ref(null)
+const favorites = ref([])
 
 // APIからデータを取得する関数
 const fetchQuote = async () => {
@@ -54,25 +43,64 @@ const loadFavorites = () => {
   }
 }
 
+// お気に入りに追加
+const addToFavorites = () => {
+  if (quote.value && !favorites.value.some(fav => fav.text === quote.value.text)) {
+    favorites.value.push(quote.value)
+    localStorage.setItem('favorites', JSON.stringify(favorites.value))
+  }
+}
+
+// お気に入りから削除
+const removeFromFavorites = (index) => {
+  favorites.value.splice(index, 1)
+  localStorage.setItem('favorites', JSON.stringify(favorites.value))
+}
+
 loadFavorites()
 </script>
 
-<style>
-body {
-    background: radial-gradient(circle, rgba(255, 175, 189, 0.8), rgba(100, 216, 249, 0.8));
-    color: #fff;
-    /* テキストを白に */
-    font-family: 'Arial', sans-serif;
-    /* モダンなフォント */
-    margin: 0;
-    padding: 0;
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+.quote-box {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.favorites-section {
+  margin-top: 40px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+button {
+  margin: 5px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 </style>
