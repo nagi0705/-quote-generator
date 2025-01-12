@@ -8,8 +8,8 @@ export default defineEventHandler(() => {
     { text: "悔しいと感じなくなった時が、やめるべきタイミング。", author: "ベル" },
     { text: "笑顔が消えてしまうほど、頑張らなくていい。", author: "フィル" },
     { text: "嫌われることを恐れていたら、自分自身を嫌いになっていくだけ。", author: "アン" },
-    { text: "失敗にするか、教訓にするかは、自分次第。", author: "寺田康佑" },
-    { text: "外見は中身の一番外側。", author: "寺田凪沙" }
+    { text: "失敗にするか、教訓にするかは、自分次第。", author: "terisuke" },
+    { text: "外見は中身の一番外側。", author: "Lull" }
   ]
   return quotes
 })

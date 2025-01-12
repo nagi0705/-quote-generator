@@ -73,7 +73,7 @@ h1, h2 {
   text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
 }
 
-.button {
+.button, .delete-button {
   background-color: rgba(255, 255, 255, 0.4);
   border: 2px solid #fff;
   color: #333;
@@ -84,8 +84,8 @@ h1, h2 {
   transition: all 0.3s ease;
 }
 
-.button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+.button:hover, .delete-button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .quote-container {
