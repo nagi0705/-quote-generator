@@ -8,14 +8,16 @@
             <button class="button" @click="addToFavorites">お気に入りに追加</button>
         </div>
         
-        <h2>お気に入りリスト</h2>
-        <ul>
-            <li v-for="(fav, index) in favorites" :key="index" class="favorite-item">
-                <p>{{ fav.text }}</p>
-                <p>- {{ fav.author }}</p>
-                <button class="delete-button" @click="removeFromFavorites(index)">削除</button>
-            </li>
-        </ul>
+        <div class="favorites">
+            <h2>お気に入りリスト</h2>
+            <ul>
+                <li v-for="(fav, index) in favorites" :key="index" class="favorite-item">
+                    <p>{{ fav.text }}</p>
+                    <p>- {{ fav.author }}</p>
+                    <button class="button" @click="removeFromFavorites(index)">削除</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -73,7 +75,7 @@ h1, h2 {
   text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
 }
 
-.button, .delete-button {
+.button {
   background-color: rgba(255, 255, 255, 0.4);
   border: 2px solid #fff;
   color: #333;
@@ -84,7 +86,7 @@ h1, h2 {
   transition: all 0.3s ease;
 }
 
-.button:hover, .delete-button:hover {
+.button:hover {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
